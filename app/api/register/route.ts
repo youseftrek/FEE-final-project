@@ -4,7 +4,8 @@ import { prisma } from "@/lib/prisma"
 
 export async function POST(req:Request)
 {
-    const body = await req.json()
+    try {
+        const body = await req.json()
     const name =body.name
     const email =body.email
     const pass = body.password
@@ -22,4 +23,8 @@ export async function POST(req:Request)
     const token = signToken({ userId: newUser.id, email: newUser.email })
    
     return Response.json({success:true,message:"User Create successfully",user:{id:newUser.id,email:newUser.email,name:newUser.name,token}})
+    }
+    catch {
+            return Response.json({ success:false, message: "internal server error try again later"})
+    }
 }
