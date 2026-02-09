@@ -344,7 +344,6 @@ export default function CompleteProfilePage() {
                             <SelectContent>
                               <SelectItem value="male">Male</SelectItem>
                               <SelectItem value="female">Female</SelectItem>
-                              <SelectItem value="other">Other</SelectItem>
                             </SelectContent>
                           </Select>
                           {fieldState.invalid && (
