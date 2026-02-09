@@ -1,7 +1,17 @@
 "use client";
 
 import * as React from "react";
-import { Dumbbell, Clock, Target, TrendingUp, Calendar, ChevronRight, Check, Loader2, Sparkles } from "lucide-react";
+import {
+  Dumbbell,
+  Clock,
+  Target,
+  TrendingUp,
+  Calendar,
+  ChevronRight,
+  Check,
+  Loader2,
+  Sparkles,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -11,7 +21,6 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { cn } from "@/lib/utils";
 import { toast } from "sonner";
@@ -59,10 +68,7 @@ export function WorkoutPlan() {
   // Save to localStorage whenever weeks change
   React.useEffect(() => {
     if (weeks.length > 0) {
-      localStorage.setItem(
-        STORAGE_KEY,
-        JSON.stringify({ weeks, currentWeek })
-      );
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({ weeks, currentWeek }));
     }
   }, [weeks, currentWeek]);
 
@@ -119,14 +125,16 @@ export function WorkoutPlan() {
           return { ...week, exercises: updatedExercises };
         }
         return week;
-      })
+      }),
     );
   };
 
   const currentWeekData = weeks.find((w) => w.week === currentWeek);
-  const completedCount = currentWeekData?.exercises.filter((ex) => ex.completed).length || 0;
+  const completedCount =
+    currentWeekData?.exercises.filter((ex) => ex.completed).length || 0;
   const totalCount = currentWeekData?.exercises.length || 0;
-  const progressPercent = totalCount > 0 ? (completedCount / totalCount) * 100 : 0;
+  const progressPercent =
+    totalCount > 0 ? (completedCount / totalCount) * 100 : 0;
 
   const getDifficultyColor = (difficulty: string) => {
     switch (difficulty.toLowerCase()) {
@@ -146,7 +154,7 @@ export function WorkoutPlan() {
       {/* Header Card */}
       <Card className="border-2">
         <CardHeader>
-          <div className="flex items-center justify-between">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div className="space-y-1">
               <CardTitle className="text-2xl flex items-center gap-2">
                 <Calendar className="h-6 w-6 text-primary" />
@@ -156,14 +164,24 @@ export function WorkoutPlan() {
                 Personalized exercises based on your fitness profile
               </CardDescription>
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 flex-shrink-0">
               <Button
                 onClick={() => setCurrentWeek((prev) => Math.max(1, prev - 1))}
                 variant="outline"
                 size="sm"
                 disabled={currentWeek === 1}
+                className="hidden sm:inline-flex"
               >
                 Previous Week
+              </Button>
+              <Button
+                onClick={() => setCurrentWeek((prev) => Math.max(1, prev - 1))}
+                variant="outline"
+                size="sm"
+                disabled={currentWeek === 1}
+                className="sm:hidden"
+              >
+                Prev
               </Button>
               <Badge variant="outline" className="px-4 py-2 text-lg">
                 Week {currentWeek}
@@ -172,8 +190,17 @@ export function WorkoutPlan() {
                 onClick={() => setCurrentWeek((prev) => prev + 1)}
                 variant="outline"
                 size="sm"
+                className="hidden sm:inline-flex"
               >
                 Next Week
+              </Button>
+              <Button
+                onClick={() => setCurrentWeek((prev) => prev + 1)}
+                variant="outline"
+                size="sm"
+                className="sm:hidden"
+              >
+                Next
               </Button>
             </div>
           </div>
@@ -203,7 +230,9 @@ export function WorkoutPlan() {
       {currentWeekData ? (
         <div className="space-y-6">
           <div className="flex items-center justify-between">
-            <h2 className="text-xl font-semibold">Week {currentWeek} Exercises</h2>
+            <h2 className="text-xl font-semibold">
+              Week {currentWeek} Exercises
+            </h2>
             <Button
               onClick={generateExercises}
               disabled={generatingExercises}
@@ -231,7 +260,7 @@ export function WorkoutPlan() {
                 key={index}
                 className={cn(
                   "relative overflow-hidden transition-all hover:shadow-md flex flex-col",
-                  exercise.completed && "bg-muted/50"
+                  exercise.completed && "bg-muted/50",
                 )}
               >
                 {/* Completion Indicator */}
@@ -240,7 +269,7 @@ export function WorkoutPlan() {
                     "absolute top-0 left-0 w-1 h-full transition-all",
                     exercise.completed
                       ? "bg-gradient-to-b from-green-500 to-emerald-500"
-                      : "bg-gradient-to-b from-primary via-purple-600 to-orange-500"
+                      : "bg-gradient-to-b from-primary via-purple-600 to-orange-500",
                   )}
                 />
 
@@ -252,7 +281,10 @@ export function WorkoutPlan() {
                           {exercise.name}
                         </CardTitle>
                         {exercise.completed && (
-                          <Badge variant="outline" className="gap-1 bg-green-500/10 text-green-700 dark:text-green-400 border-green-500/20">
+                          <Badge
+                            variant="outline"
+                            className="gap-1 bg-green-500/10 text-green-700 dark:text-green-400 border-green-500/20"
+                          >
                             <Check className="h-3 w-3" />
                             Done
                           </Badge>
@@ -278,18 +310,28 @@ export function WorkoutPlan() {
                     <div className="grid grid-cols-3 gap-3">
                       <div className="flex flex-col items-center gap-1 p-3 rounded-lg bg-muted/50">
                         <TrendingUp className="h-4 w-4 text-primary" />
-                        <span className="text-xs text-muted-foreground">Sets</span>
+                        <span className="text-xs text-muted-foreground">
+                          Sets
+                        </span>
                         <span className="font-semibold">{exercise.sets}</span>
                       </div>
                       <div className="flex flex-col items-center gap-1 p-3 rounded-lg bg-muted/50">
                         <Dumbbell className="h-4 w-4 text-primary" />
-                        <span className="text-xs text-muted-foreground">Reps</span>
-                        <span className="font-semibold text-sm">{exercise.reps}</span>
+                        <span className="text-xs text-muted-foreground">
+                          Reps
+                        </span>
+                        <span className="font-semibold text-sm">
+                          {exercise.reps}
+                        </span>
                       </div>
                       <div className="flex flex-col items-center gap-1 p-3 rounded-lg bg-muted/50">
                         <Clock className="h-4 w-4 text-primary" />
-                        <span className="text-xs text-muted-foreground">Rest</span>
-                        <span className="font-semibold text-sm">{exercise.restTime}</span>
+                        <span className="text-xs text-muted-foreground">
+                          Rest
+                        </span>
+                        <span className="font-semibold text-sm">
+                          {exercise.restTime}
+                        </span>
                       </div>
                     </div>
 
@@ -297,7 +339,9 @@ export function WorkoutPlan() {
                     <div className="flex items-center gap-2">
                       <Target className="h-4 w-4 text-muted-foreground" />
                       <span className="text-sm font-medium">Equipment:</span>
-                      <span className="text-sm text-muted-foreground">{exercise.equipment}</span>
+                      <span className="text-sm text-muted-foreground">
+                        {exercise.equipment}
+                      </span>
                     </div>
 
                     {/* Tips */}
@@ -334,9 +378,7 @@ export function WorkoutPlan() {
                         Completed
                       </>
                     ) : (
-                      <>
-                        Mark as Complete
-                      </>
+                      <>Mark as Complete</>
                     )}
                   </Button>
                 </CardContent>
@@ -352,9 +394,14 @@ export function WorkoutPlan() {
               No workout plan for Week {currentWeek}
             </h3>
             <p className="text-muted-foreground mb-6 max-w-md">
-              Generate your personalized exercise routine for this week based on your profile.
+              Generate your personalized exercise routine for this week based on
+              your profile.
             </p>
-            <Button onClick={generateExercises} disabled={generatingExercises} className="gap-2">
+            <Button
+              onClick={generateExercises}
+              disabled={generatingExercises}
+              className="gap-2"
+            >
               {generatingExercises ? (
                 <>
                   <Loader2 className="h-4 w-4 animate-spin" />

@@ -32,7 +32,7 @@ export async function POST(request: Request) {
 
   const ai = new GoogleGenAI({ apiKey });
   const prompt = `## Overview
-You are AI Fitness & Diet Planner. Your job is to assist users with fitness, nutrition, workout plans, and general physical health only. Always be polite, supportive, and reply in the user’s language. The current date and time is {{ $now.toString() }}
+You are AI Fitness & Diet Planner called (Healthify). Your job is to assist users with fitness, nutrition, workout plans, and general physical health only. Always be polite, supportive, and reply in the user’s language. The current date and time is {{ $now.toString() }}
 
 ## Tools
 - Chat Input: Receive user messages

@@ -255,7 +255,7 @@ export default function CompleteProfilePage() {
         <div className="flex items-center justify-center gap-2 mb-8">
           <Dumbbell className="h-8 w-8 text-primary" />
           <span className="text-3xl font-bold bg-gradient-to-r from-primary via-purple-600 to-orange-500 bg-clip-text text-transparent">
-            fitAI
+            Healthify
           </span>
         </div>
 
@@ -826,10 +826,15 @@ export default function CompleteProfilePage() {
                                     onCheckedChange={(checked) => {
                                       const current = field.value || [];
                                       if (checked) {
-                                        field.onChange([...current, item.value]);
+                                        field.onChange([
+                                          ...current,
+                                          item.value,
+                                        ]);
                                       } else {
                                         field.onChange(
-                                          current.filter((i) => i !== item.value),
+                                          current.filter(
+                                            (i) => i !== item.value,
+                                          ),
                                         );
                                       }
                                     }}
@@ -855,9 +860,7 @@ export default function CompleteProfilePage() {
                       control={form.control}
                       render={({ field }) => (
                         <Field>
-                          <FieldLabel>
-                            Any Injuries? (Optional)
-                          </FieldLabel>
+                          <FieldLabel>Any Injuries? (Optional)</FieldLabel>
                           <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
                             {injuryOptions.map((item) => (
                               <label

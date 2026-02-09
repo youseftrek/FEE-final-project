@@ -47,7 +47,7 @@ export function FitAILanding() {
               <Dumbbell className="h-6 w-6 text-primary" />
             </div>
             <span className="text-2xl font-bold bg-gradient-to-r from-primary via-purple-600 to-orange-500 bg-clip-text text-transparent">
-              fitAI
+              Healthify
             </span>
           </div>
 
@@ -181,7 +181,7 @@ export function FitAILanding() {
                 "text-lg px-8 shadow-md hover:shadow-md transition-all group",
               )}
             >
-              Get Started with fitAI
+              Get Started with Healthify
               <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>
@@ -198,7 +198,8 @@ export function FitAILanding() {
             One platform. One brain. Zero confusion.
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Most fitness apps give you templates. fitAI gives you intelligence.
+            Most fitness apps give you templates. Healthify gives you
+            intelligence.
           </p>
         </div>
 
@@ -323,7 +324,7 @@ export function FitAILanding() {
               "text-lg px-8 shadow-md hover:shadow-md transition-all group",
             )}
           >
-            Get Started with fitAI
+            Get Started with Healthify
             <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
           </Link>
         </div>
@@ -336,7 +337,7 @@ export function FitAILanding() {
             <div className="flex items-center gap-2">
               <Dumbbell className="h-5 w-5 text-primary" />
               <span className="font-semibold bg-gradient-to-r from-primary via-purple-600 to-orange-500 bg-clip-text text-transparent">
-                fitAI
+                Healthify
               </span>
               <span className="text-sm text-muted-foreground">
                 - Your Personal AI Fitness Brain
@@ -364,7 +365,7 @@ export function FitAILanding() {
             </div>
           </div>
           <div className="text-center text-sm text-muted-foreground mt-4 pt-4 border-t">
-            <p>&copy; 2026 fitAI. Built with AI for AI-powered fitness.</p>
+            <p>&copy; 2026 Healthify. Built with AI for AI-powered fitness.</p>
           </div>
         </div>
       </footer>

@@ -27,7 +27,10 @@ export default function DashboardLayout({
       const profileResponse = await fetch("/api/profile/get");
       const profileResult = await profileResponse.json();
 
-      if (!profileResult.success && window.location.pathname !== "/complete-profile") {
+      if (
+        !profileResult.success &&
+        window.location.pathname !== "/complete-profile"
+      ) {
         // Profile not completed, redirect to complete-profile
         window.location.href = "/complete-profile";
         return;
@@ -58,7 +61,7 @@ export default function DashboardLayout({
               <Dumbbell className="h-6 w-6 text-primary" />
             </div>
             <span className="text-2xl font-bold bg-gradient-to-r from-primary via-purple-600 to-orange-500 bg-clip-text text-transparent">
-              fitAI
+              Healthify
             </span>
           </Link>
           <div className="flex items-center gap-2">
