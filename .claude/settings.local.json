@@ -6,7 +6,10 @@
       "Bash(npm install:*)",
       "Bash(npm run dev:*)",
       "Bash(del:*)",
-      "Bash(git restore:*)"
+      "Bash(git restore:*)",
+      "WebFetch(domain:neon.com)",
+      "Bash(dir:*)",
+      "Bash(npx prisma generate:*)"
     ]
   }
 }

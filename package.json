@@ -13,6 +13,7 @@
     "@google/genai": "^1.40.0",
     "@gradio/client": "^2.0.4",
     "@hookform/resolvers": "^5.2.2",
+    "@prisma/adapter-neon": "^7.3.0",
     "@prisma/client": "6.15.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
