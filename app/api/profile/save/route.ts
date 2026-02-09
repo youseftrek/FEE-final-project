@@ -1,23 +1,19 @@
 import { verifyToken } from "@/lib/jwt";
 import { prisma } from "@/lib/prisma";
-import { NextResponse } from "next/server";
+import { cookies } from "next/headers";
 
 export async function POST(req: Request) {
     try {
-        const authHeader = req.headers.get("authorization");
-        if (!authHeader || !authHeader.startsWith("Bearer ")) {
-            return NextResponse.json(
-                { error: "Unauthorized" },
-                { status: 401 }
-            );
+        const cookieStore = await cookies();
+        const token = cookieStore.get("token");
+
+        if (!token) {
+            return Response.json({ success: false, message: "Not authenticated" }, { status: 401 });
         }
-        const token = authHeader.split(" ")[1];
-        const data = verifyToken(token);
+
+        const data = verifyToken(token.value);
         if (!data) {
-            return NextResponse.json(
-                { error: "Unauthorized" },
-                { status: 401 }
-            );
+            return Response.json({ success: false, message: "Invalid token" }, { status: 401 });
         }
         
         const body = await req.json();

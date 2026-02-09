@@ -1,11 +1,5 @@
-import Image from "next/image";
+import { FitAILanding } from "@/components/fitai-landing";
 
-export default function Home() {
-  return (
-    <div>
-      <h1>
-        Hello world ....
-      </h1>
-    </div>
-  );
+export default function Page() {
+  return <FitAILanding />;
 }
