@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(tasklist:*)",
+      "Bash(findstr:*)",
+      "Bash(npm install:*)",
+      "Bash(npm run dev:*)",
+      "Bash(del:*)"
+    ]
+  }
+}

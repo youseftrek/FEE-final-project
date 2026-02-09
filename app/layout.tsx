@@ -1,6 +1,12 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Inter } from "next/font/google";
 import "./globals.css";
+import { ThemeProvider } from "@/components/theme-provider";
+import NextTopLoader from "nextjs-toploader";
+import ToasterClient from "@/components/toasterClient";
+import { FloatingChatbot } from "@/components/floating-chatbot";
+
+const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -23,11 +29,35 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className={inter.variable} suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <NextTopLoader
+          color="#1db6a5"
+          initialPosition={0.08}
+          crawlSpeed={200}
+          height={3}
+          crawl={true}
+          showSpinner={true}
+          easing="ease"
+          speed={200}
+          shadow="0 0 10px #2299DD,0 0 5px #2299DD"
+          template='<div class="bar" role="bar"><div class="peg"></div></div> 
+  <div class="spinner" role="spinner"><div class="spinner-icon"></div></div>'
+          zIndex={1600}
+          showAtBottom={false}
+        />
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+          <ToasterClient />
+          <FloatingChatbot />
+        </ThemeProvider>
       </body>
     </html>
   );
