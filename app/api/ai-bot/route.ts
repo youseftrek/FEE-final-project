@@ -7,6 +7,7 @@ import { NextResponse } from "next/server";
 export async function POST(request: Request) {
   const body = await request.json();
   const userMsg = body.message;
+  const history = body.history || [];
 
   const cookieStore = await cookies();
   const token = cookieStore.get("token");
@@ -69,7 +70,8 @@ export async function POST(request: Request) {
   }
 
   const ai = new GoogleGenAI({ apiKey });
-  const prompt = `
+
+  const systemPrompt = `
 ## Overview
 You are an AI Fitness & Diet Planner(Healthify). Your job is to give concise, practical guidance on fitness, workouts, nutrition, and physical health only.
 The current date and time is ${new Date().toLocaleString()}
@@ -98,15 +100,26 @@ Input: Hi (with user name available)
 Input: Hi (without user profile)
 - Output: "Hello! I'm Healthify, your fitness and diet assistant. What would you like help with today - workout planning, nutrition advice, or something else?"
 
-2)
+3)
 Input: What's the best investment?
 - Output: "I specialize in fitness and nutrition only. I can help with workouts, diet, or health-related questions."
+`;
 
-User message: ${userMsg}`;
+  // Build conversation history for context
+  let conversationHistory = systemPrompt + "\n\n## Conversation History:\n";
+
+  if (history.length > 0) {
+    history.forEach((msg: { role: string; content: string }) => {
+      const roleLabel = msg.role === "user" ? "User" : "Assistant";
+      conversationHistory += `${roleLabel}: ${msg.content}\n`;
+    });
+  }
+
+  conversationHistory += `\nUser: ${userMsg}`;
 
   const aiResponse = await ai.models.generateContent({
     model: "gemini-3-flash-preview",
-    contents: prompt,
+    contents: conversationHistory,
   });
 
   return NextResponse.json({ success: true, response: aiResponse.text });

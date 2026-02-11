@@ -163,6 +163,10 @@ export function FloatingChatbot() {
         },
         body: JSON.stringify({
           message: input.trim(),
+          history: updatedMessages.map((msg) => ({
+            role: msg.role,
+            content: msg.content,
+          })),
         }),
       });
 
