@@ -1,9 +1,17 @@
+import { verifyToken } from "@/lib/jwt";
+import { prisma } from "@/lib/prisma";
 import { GoogleGenAI } from "@google/genai";
+import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
   const body = await request.json();
   const userMsg = body.message;
+
+  const cookieStore = await cookies();
+  const token = cookieStore.get("token");
+  let userData = null;
+  let userProfile = null;
 
   if (!userMsg) {
     return NextResponse.json(
@@ -16,6 +24,18 @@ export async function POST(request: Request) {
       },
     );
   }
+
+  if (token) {
+    try {
+      userData = verifyToken(token.value);
+      if (userData) {
+        userProfile = await prisma.profile.findUnique({ where: { userId: userData.userId } });
+      }
+    } catch (error) {
+      console.error("Token verification failed:", error);
+    }
+  }
+
 
   const apiKey = process.env.GEMINI_API_KEY;
   if (!apiKey) {
@@ -30,33 +50,59 @@ export async function POST(request: Request) {
     );
   }
 
-  const ai = new GoogleGenAI({ apiKey });
-  const prompt = `## Overview
-You are AI Fitness & Diet Planner called (Healthify). Your job is to assist users with fitness, nutrition, workout plans, and general physical health only. Always be polite, supportive, and reply in the user’s language. The current date and time is {{ $now.toString() }}
+  let profileContext = "";
+  if (userProfile) {
+    profileContext = `
+## User Profile Context
+- Name: ${userProfile.firstName} ${userProfile.lastName}
+- Age: ${userProfile.age}
+- Gender: ${userProfile.gender}
+- Height: ${userProfile.height} cm
+- Weight: ${userProfile.weight} kg
+- Goal: ${userProfile.goal}
+- Fitness Level: ${userProfile.level}
+- Workout Location: ${userProfile.place}
+- Available Equipment: ${Array.isArray(userProfile.equipment) ? userProfile.equipment.join(", ") : JSON.stringify(userProfile.equipment)}
+- Injuries/Limitations: ${userProfile.injures ? (Array.isArray(userProfile.injures) ? userProfile.injures.join(", ") : JSON.stringify(userProfile.injures)) : "None reported"}
+- Schedule: ${userProfile.days} days per week, ${userProfile.sessionTime} minutes per session
+`;
+  }
 
-## Tools
-- Chat Input: Receive user messages
-- Chat History: Keep conversation context
+  const ai = new GoogleGenAI({ apiKey });
+  const prompt = `
+## Overview
+You are an AI Fitness & Diet Planner(Healthify). Your job is to give concise, practical guidance on fitness, workouts, nutrition, and physical health only.
+The current date and time is ${new Date().toLocaleString()}
+${profileContext}
 
 ## Rules
-- Answer only fitness, nutrition, workouts, and physical health topics
-- If the user asks about anything outside this scope, politely explain that you are specialized only in fitness, diet, and exercise
-- Do not provide medical diagnoses, medications, or treatments
-- Promote safe and sustainable habits
+- Keep responses VERY short (2-3 sentences maximum)
+- Answer only fitness, diet, workouts, and physical health topics
+- No medical diagnosis, medications, or treatments
+- Do not re-introduce yourself after the first message
 
 ## Instructions
-1) Start the first interaction with a friendly welcome message introducing yourself as AI Fitness & Diet Planner
-2) Detect the user’s language and respond using the same language
-3) If the user requests a diet or workout plan, ask for height, weight, age, gender, goals, activity level, and injuries
-4) Provide personalized guidance only after collecting the required information
+1) Always use the user's first name throughout the conversation if available in the User Profile Context - make responses personal and friendly
+2) For greetings or casual messages: Briefly introduce yourself and ask what specific topic they need help with (e.g., "workout plan", "nutrition advice", "exercise form")
+3) Reply in the user's language
+4) Only provide detailed advice when the user specifically requests it
+5) If User Profile Context is provided, only mention specific details when giving actual advice - don't list it out unprompted
+6) Wait for the user to tell you what they want help with before offering detailed plans
 
 ## Examples
 1)
-Input: What’s the best investment?
-- Action: Politely refuse and clarify specialization
-- Output: Explain focus on fitness and nutrition only
-the previous was the system rules. 
-user message : ${userMsg}`;
+Input: Hi (with user name available)
+- Output: "Hello [Name]! I'm Healthify, your fitness and diet assistant. What would you like help with today - workout planning, nutrition advice, or something else?"
+
+2)
+Input: Hi (without user profile)
+- Output: "Hello! I'm Healthify, your fitness and diet assistant. What would you like help with today - workout planning, nutrition advice, or something else?"
+
+2)
+Input: What's the best investment?
+- Output: "I specialize in fitness and nutrition only. I can help with workouts, diet, or health-related questions."
+
+User message: ${userMsg}`;
 
   const aiResponse = await ai.models.generateContent({
     model: "gemini-3-flash-preview",
