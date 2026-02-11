@@ -38,15 +38,15 @@ import {
 
 export function FitAILanding() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-background via-background to-primary/5">
+    <div className="bg-gradient-to-b from-background via-background to-primary/5 min-h-screen">
       {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 border-b bg-background/80 backdrop-blur-xl supports-[backdrop-filter]:bg-background/60 z-50 shadow-sm">
-        <div className="container mx-auto flex h-16 items-center justify-between px-4">
+      <nav className="top-0 right-0 left-0 z-50 fixed bg-background/80 supports-[backdrop-filter]:bg-background/60 shadow-sm backdrop-blur-xl border-b">
+        <div className="flex justify-between items-center mx-auto px-4 h-16 container">
           <div className="flex items-center gap-2">
             <div className="relative">
-              <Dumbbell className="h-6 w-6 text-primary" />
+              <Dumbbell className="w-6 h-6 text-primary" />
             </div>
-            <span className="text-2xl font-bold bg-gradient-to-r from-primary via-purple-600 to-orange-500 bg-clip-text text-transparent">
+            <span className="bg-clip-text bg-gradient-to-r from-primary via-purple-600 to-orange-500 font-bold text-transparent text-2xl">
               Healthify
             </span>
           </div>
@@ -59,18 +59,6 @@ export function FitAILanding() {
             >
               Features
             </Link>
-            <Link
-              href="#pricing"
-              className={cn(buttonVariants({ variant: "ghost" }))}
-            >
-              Pricing
-            </Link>
-            <Link
-              href="#about"
-              className={cn(buttonVariants({ variant: "ghost" }))}
-            >
-              About
-            </Link>
             <ModeToggle />
             <Link href="/auth/signin" className={cn(buttonVariants())}>
               Get Started
@@ -78,12 +66,12 @@ export function FitAILanding() {
           </div>
 
           {/* Mobile Navigation */}
-          <div className="flex md:hidden items-center gap-2">
+          <div className="md:hidden flex items-center gap-2">
             <ModeToggle />
             <Drawer direction="bottom">
               <DrawerTrigger asChild>
                 <Button variant="outline" size="icon">
-                  <Menu className="h-5 w-5" />
+                  <Menu className="w-5 h-5" />
                   <span className="sr-only">Toggle menu</span>
                 </Button>
               </DrawerTrigger>
@@ -103,28 +91,7 @@ export function FitAILanding() {
                       Features
                     </Link>
                   </DrawerClose>
-                  <DrawerClose asChild>
-                    <Link
-                      href="#pricing"
-                      className={cn(
-                        buttonVariants({ variant: "ghost", size: "lg" }),
-                        "w-full justify-start text-base",
-                      )}
-                    >
-                      Pricing
-                    </Link>
-                  </DrawerClose>
-                  <DrawerClose asChild>
-                    <Link
-                      href="#about"
-                      className={cn(
-                        buttonVariants({ variant: "ghost", size: "lg" }),
-                        "w-full justify-start text-base",
-                      )}
-                    >
-                      About
-                    </Link>
-                  </DrawerClose>
+                  
                   <DrawerClose asChild>
                     <Link
                       href="/auth/signin"
@@ -148,32 +115,32 @@ export function FitAILanding() {
 
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-primary/10 dark:bg-primary/20 rounded-full blur-3xl opacity-30 dark:opacity-50" />
-        <div className="absolute top-40 right-10 w-96 h-96 bg-purple-500/10 dark:bg-purple-500/20 rounded-full blur-3xl opacity-30 dark:opacity-50" />
-        <div className="absolute bottom-20 left-1/3 w-80 h-80 bg-orange-500/10 dark:bg-orange-500/20 rounded-full blur-3xl opacity-30 dark:opacity-50" />
+        <div className="top-20 left-10 absolute bg-primary/10 dark:bg-primary/20 opacity-30 dark:opacity-50 blur-3xl rounded-full w-72 h-72" />
+        <div className="top-40 right-10 absolute bg-purple-500/10 dark:bg-purple-500/20 opacity-30 dark:opacity-50 blur-3xl rounded-full w-96 h-96" />
+        <div className="bottom-20 left-1/3 absolute bg-orange-500/10 dark:bg-orange-500/20 opacity-30 dark:opacity-50 blur-3xl rounded-full w-80 h-80" />
       </div>
 
       {/* Hero Section */}
-      <section className="container mx-auto px-4 py-20 md:py-32 relative z-10">
-        <div className="flex flex-col items-center text-center space-y-6">
-          <Badge variant="secondary" className="px-4 py-1.5 shadow-sm">
-            <Sparkles className="h-3 w-3 mr-2" />
+      <section className="z-10 relative mx-auto px-4 py-20 md:py-32 container">
+        <div className="flex flex-col items-center space-y-6 text-center">
+          <Badge variant="secondary" className="shadow-sm px-4 py-1.5">
+            <Sparkles className="mr-2 w-3 h-3" />
             Your Personal AI Fitness Brain
           </Badge>
 
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight max-w-4xl">
+          <h1 className="max-w-4xl font-bold text-4xl md:text-6xl lg:text-7xl tracking-tight">
             Train smarter. Eat better.{" "}
-            <span className="bg-gradient-to-r from-primary via-purple-600 to-orange-500 bg-clip-text text-transparent">
+            <span className="bg-clip-text bg-gradient-to-r from-primary via-purple-600 to-orange-500 text-transparent">
               Get results
             </span>
           </h1>
 
-          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl">
+          <p className="max-w-2xl text-muted-foreground text-lg md:text-xl">
             Powered by AI that actually knows you. No generic plans. No
             guessing. Just data-driven fitness with an AI coach in your pocket.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 pt-4">
+          <div className="flex sm:flex-row flex-col gap-4 pt-4">
             <Link
               href="/dashboard"
               className={cn(
@@ -182,7 +149,7 @@ export function FitAILanding() {
               )}
             >
               Get Started with Healthify
-              <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+              <ArrowRight className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" />
             </Link>
           </div>
         </div>
@@ -191,24 +158,24 @@ export function FitAILanding() {
       {/* Features Section */}
       <section
         id="features"
-        className="container mx-auto px-4 py-20 relative z-10"
+        className="z-10 relative mx-auto px-4 py-20 container"
       >
-        <div className="text-center space-y-3 mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold">
+        <div className="space-y-3 mb-12 text-center">
+          <h2 className="font-bold text-3xl md:text-4xl">
             One platform. One brain. Zero confusion.
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          <p className="mx-auto max-w-2xl text-muted-foreground text-lg">
             Most fitness apps give you templates. Healthify gives you
             intelligence.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+        <div className="gap-6 grid md:grid-cols-3 mx-auto max-w-5xl">
           {/* Feature 1: Exercise Plans */}
           <Card className="border hover:border-primary/50 transition-all duration-300">
             <CardHeader>
-              <div className="h-12 w-12 rounded-lg bg-primary/10 flex items-center justify-center mb-3">
-                <Dumbbell className="h-6 w-6 text-primary" />
+              <div className="flex justify-center items-center bg-primary/10 mb-3 rounded-lg w-12 h-12">
+                <Dumbbell className="w-6 h-6 text-primary" />
               </div>
               <CardTitle className="text-xl">
                 Personalized Exercise Plans
@@ -219,20 +186,20 @@ export function FitAILanding() {
             </CardHeader>
             <CardContent className="space-y-2">
               <div className="flex items-start gap-2">
-                <Check className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
-                <span className="text-sm text-muted-foreground">
+                <Check className="flex-shrink-0 mt-0.5 w-4 h-4 text-primary" />
+                <span className="text-muted-foreground text-sm">
                   Based on your age, weight, and fitness level
                 </span>
               </div>
               <div className="flex items-start gap-2">
-                <Check className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
-                <span className="text-sm text-muted-foreground">
+                <Check className="flex-shrink-0 mt-0.5 w-4 h-4 text-primary" />
+                <span className="text-muted-foreground text-sm">
                   Adapts to your available equipment
                 </span>
               </div>
               <div className="flex items-start gap-2">
-                <Check className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
-                <span className="text-sm text-muted-foreground">
+                <Check className="flex-shrink-0 mt-0.5 w-4 h-4 text-primary" />
+                <span className="text-muted-foreground text-sm">
                   Plans evolve as your body improves
                 </span>
               </div>
@@ -242,8 +209,8 @@ export function FitAILanding() {
           {/* Feature 2: AI Chatbot */}
           <Card className="border hover:border-purple-500/50 transition-all duration-300">
             <CardHeader>
-              <div className="h-12 w-12 rounded-lg bg-purple-500/10 flex items-center justify-center mb-3">
-                <MessageSquare className="h-6 w-6 text-purple-600" />
+              <div className="flex justify-center items-center bg-purple-500/10 mb-3 rounded-lg w-12 h-12">
+                <MessageSquare className="w-6 h-6 text-purple-600" />
               </div>
               <CardTitle className="text-xl">AI Chatbot Coach</CardTitle>
               <CardDescription className="text-sm">
@@ -252,20 +219,20 @@ export function FitAILanding() {
             </CardHeader>
             <CardContent className="space-y-2">
               <div className="flex items-start gap-2">
-                <Check className="h-4 w-4 text-purple-600 mt-0.5 flex-shrink-0" />
-                <span className="text-sm text-muted-foreground">
+                <Check className="flex-shrink-0 mt-0.5 w-4 h-4 text-purple-600" />
+                <span className="text-muted-foreground text-sm">
                   Get workout explanations instantly
                 </span>
               </div>
               <div className="flex items-start gap-2">
-                <Check className="h-4 w-4 text-purple-600 mt-0.5 flex-shrink-0" />
-                <span className="text-sm text-muted-foreground">
+                <Check className="flex-shrink-0 mt-0.5 w-4 h-4 text-purple-600" />
+                <span className="text-muted-foreground text-sm">
                   Nutrition advice when you need it
                 </span>
               </div>
               <div className="flex items-start gap-2">
-                <Check className="h-4 w-4 text-purple-600 mt-0.5 flex-shrink-0" />
-                <span className="text-sm text-muted-foreground">
+                <Check className="flex-shrink-0 mt-0.5 w-4 h-4 text-purple-600" />
+                <span className="text-muted-foreground text-sm">
                   Motivation when you need a push
                 </span>
               </div>
@@ -275,8 +242,8 @@ export function FitAILanding() {
           {/* Feature 3: Calorie Scanner */}
           <Card className="border hover:border-orange-500/50 transition-all duration-300">
             <CardHeader>
-              <div className="h-12 w-12 rounded-lg bg-orange-500/10 flex items-center justify-center mb-3">
-                <Camera className="h-6 w-6 text-orange-600" />
+              <div className="flex justify-center items-center bg-orange-500/10 mb-3 rounded-lg w-12 h-12">
+                <Camera className="w-6 h-6 text-orange-600" />
               </div>
               <CardTitle className="text-xl">Calories from a Photo</CardTitle>
               <CardDescription className="text-sm">
@@ -285,20 +252,20 @@ export function FitAILanding() {
             </CardHeader>
             <CardContent className="space-y-2">
               <div className="flex items-start gap-2">
-                <Check className="h-4 w-4 text-orange-600 mt-0.5 flex-shrink-0" />
-                <span className="text-sm text-muted-foreground">
+                <Check className="flex-shrink-0 mt-0.5 w-4 h-4 text-orange-600" />
+                <span className="text-muted-foreground text-sm">
                   Snap a photo of your meal
                 </span>
               </div>
               <div className="flex items-start gap-2">
-                <Check className="h-4 w-4 text-orange-600 mt-0.5 flex-shrink-0" />
-                <span className="text-sm text-muted-foreground">
+                <Check className="flex-shrink-0 mt-0.5 w-4 h-4 text-orange-600" />
+                <span className="text-muted-foreground text-sm">
                   Get instant calorie estimates
                 </span>
               </div>
               <div className="flex items-start gap-2">
-                <Check className="h-4 w-4 text-orange-600 mt-0.5 flex-shrink-0" />
-                <span className="text-sm text-muted-foreground">
+                <Check className="flex-shrink-0 mt-0.5 w-4 h-4 text-orange-600" />
+                <span className="text-muted-foreground text-sm">
                   No scales or spreadsheets needed
                 </span>
               </div>
@@ -308,12 +275,12 @@ export function FitAILanding() {
       </section>
 
       {/* CTA Section */}
-      <section className="container mx-auto px-4 py-20 relative z-10">
-        <div className="max-w-3xl mx-auto text-center space-y-6">
-          <h2 className="text-3xl md:text-4xl font-bold">
+      <section className="z-10 relative mx-auto px-4 py-20 container">
+        <div className="space-y-6 mx-auto max-w-3xl text-center">
+          <h2 className="font-bold text-3xl md:text-4xl">
             Stop guessing. Start knowing.
           </h2>
-          <p className="text-lg text-muted-foreground">
+          <p className="text-muted-foreground text-lg">
             Let AI do the thinking—so you can focus on showing up and getting
             stronger.
           </p>
@@ -325,25 +292,25 @@ export function FitAILanding() {
             )}
           >
             Get Started with Healthify
-            <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+            <ArrowRight className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" />
           </Link>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="border-t bg-muted/30 backdrop-blur-xl relative z-10">
-        <div className="container mx-auto px-4 py-8">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+      <footer className="z-10 relative bg-muted/30 backdrop-blur-xl border-t">
+        <div className="mx-auto px-4 py-8 container">
+          <div className="flex md:flex-row flex-col justify-between items-center gap-4">
             <div className="flex items-center gap-2">
-              <Dumbbell className="h-5 w-5 text-primary" />
-              <span className="font-semibold bg-gradient-to-r from-primary via-purple-600 to-orange-500 bg-clip-text text-transparent">
+              <Dumbbell className="w-5 h-5 text-primary" />
+              <span className="bg-clip-text bg-gradient-to-r from-primary via-purple-600 to-orange-500 font-semibold text-transparent">
                 Healthify
               </span>
-              <span className="text-sm text-muted-foreground">
+              <span className="text-muted-foreground text-sm">
                 - Your Personal AI Fitness Brain
               </span>
             </div>
-            <div className="flex items-center gap-4 text-sm text-muted-foreground">
+            <div className="flex items-center gap-4 text-muted-foreground text-sm">
               <Link
                 href="#privacy"
                 className="hover:text-foreground transition-colors"
@@ -364,7 +331,7 @@ export function FitAILanding() {
               </Link>
             </div>
           </div>
-          <div className="text-center text-sm text-muted-foreground mt-4 pt-4 border-t">
+          <div className="mt-4 pt-4 border-t text-muted-foreground text-sm text-center">
             <p>&copy; 2026 Healthify. Built with AI for AI-powered fitness.</p>
           </div>
         </div>
