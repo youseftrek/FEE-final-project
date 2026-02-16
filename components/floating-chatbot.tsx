@@ -282,27 +282,27 @@ export function FloatingChatbot() {
       {!isOpen && (
         <button
           onClick={() => setIsOpen(true)}
-          className="fixed bottom-6 right-6 h-14 w-14 rounded-full bg-gradient-to-br from-primary via-purple-600 to-orange-500 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center z-50 group hover:scale-105"
+          className="group right-6 bottom-6 z-50 fixed flex justify-center items-center bg-gradient-to-br from-primary via-purple-600 to-orange-500 shadow-lg hover:shadow-xl rounded-full w-14 h-14 hover:scale-105 transition-all duration-300"
         >
-          <Sparkles className="h-6 w-6 text-white" />
+          <Sparkles className="w-6 h-6 text-white" />
 
           {/* Active indicator */}
-          <span className="absolute -top-1 -right-1 flex h-4 w-4">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-4 w-4 bg-green-500 border-2 border-white"></span>
+          <span className="-top-1 -right-1 absolute flex w-4 h-4">
+            <span className="inline-flex absolute bg-green-400 opacity-75 rounded-full w-full h-full animate-ping"></span>
+            <span className="inline-flex relative bg-green-500 border-2 border-white rounded-full w-4 h-4"></span>
           </span>
 
           {/* Floating particles */}
           <span
-            className="absolute -top-1 -left-1 h-1.5 w-1.5 bg-foreground rounded-full animate-ping"
+            className="-top-1 -left-1 absolute bg-foreground rounded-full w-1.5 h-1.5 animate-ping"
             style={{ animationDelay: "0s" }}
           />
           <span
-            className="absolute -bottom-1 -right-1 h-1.5 w-1.5 bg-foreground rounded-full animate-ping"
+            className="-right-1 -bottom-1 absolute bg-foreground rounded-full w-1.5 h-1.5 animate-ping"
             style={{ animationDelay: "0.7s" }}
           />
           <span
-            className="absolute top-0 right-0 h-1 w-1 bg-foreground rounded-full animate-ping"
+            className="top-0 right-0 absolute bg-foreground rounded-full w-1 h-1 animate-ping"
             style={{ animationDelay: "1.4s" }}
           />
         </button>
@@ -310,12 +310,12 @@ export function FloatingChatbot() {
 
       {/* Chat Window */}
       {isOpen && (
-        <Card className="fixed bottom-6 py-0 right-6 w-96 h-[600px] z-50 flex flex-col shadow-2xl overflow-hidden">
+        <Card className="right-6 bottom-6 z-50 fixed flex flex-col shadow-2xl py-0 w-96 h-[600px] overflow-hidden">
           {/* Header */}
-          <CardHeader className="bg-gradient-to-r from-primary via-purple-600 to-orange-500 text-white p-4 shrink-0">
-            <div className="flex items-center justify-between">
+          <CardHeader className="bg-gradient-to-r from-primary via-purple-600 to-orange-500 p-4 text-white shrink-0">
+            <div className="flex justify-between items-center">
               <div className="flex items-center gap-2">
-                <Sparkles className="h-5 w-5" />
+                <Sparkles className="w-5 h-5" />
                 <CardTitle className="text-lg">AI Fitness Coach</CardTitle>
               </div>
               <div className="flex items-center gap-2">
@@ -323,18 +323,18 @@ export function FloatingChatbot() {
                   variant="ghost"
                   size="icon"
                   onClick={handleNewChat}
-                  className="h-8 w-8 text-white hover:bg-white/20"
+                  className="hover:bg-white/20 w-8 h-8 text-white"
                   title="New Chat"
                 >
-                  <RefreshCw className="h-4 w-4" />
+                  <RefreshCw className="w-4 h-4" />
                 </Button>
                 <Button
                   variant="ghost"
                   size="icon"
                   onClick={() => setIsOpen(false)}
-                  className="h-8 w-8 text-white hover:bg-white/20"
+                  className="hover:bg-white/20 w-8 h-8 text-white"
                 >
-                  <X className="h-4 w-4" />
+                  <X className="w-4 h-4" />
                 </Button>
               </div>
             </div>
@@ -342,12 +342,12 @@ export function FloatingChatbot() {
 
           {/* Resume Dialog */}
           {showResumeDialog && (
-            <div className="absolute inset-0 bg-background/95 backdrop-blur-sm z-10 flex items-center justify-center p-6">
-              <div className="bg-card border rounded-lg p-6 max-w-sm space-y-4">
-                <h3 className="text-lg font-semibold">
+            <div className="z-10 absolute inset-0 flex justify-center items-center bg-background/95 backdrop-blur-sm p-6">
+              <div className="space-y-4 bg-card p-6 border rounded-lg max-w-sm">
+                <h3 className="font-semibold text-lg">
                   Continue Previous Chat?
                 </h3>
-                <p className="text-sm text-muted-foreground">
+                <p className="text-muted-foreground text-sm">
                   You have a previous conversation. Would you like to resume it
                   or start fresh?
                 </p>
@@ -371,28 +371,28 @@ export function FloatingChatbot() {
           <Tabs
             value={activeTab}
             onValueChange={setActiveTab}
-            className="flex-1 flex flex-col min-h-0"
+            className="flex flex-col flex-1 min-h-0"
           >
-            <TabsList className="mx-4 mt-3 grid w-[calc(100%-2rem)] grid-cols-2">
+            <TabsList className="grid grid-cols-2 mx-4 mt-3 w-[calc(100%-2rem)]">
               <TabsTrigger value="chat" className="gap-2">
-                <MessageCircle className="h-4 w-4" />
+                <MessageCircle className="w-4 h-4" />
                 Chat
               </TabsTrigger>
               <TabsTrigger value="upload" className="gap-2">
-                <ImageIcon className="h-4 w-4" />
+                <ImageIcon className="w-4 h-4" />
                 Image Upload
               </TabsTrigger>
             </TabsList>
 
             {/* Chat Tab */}
-            <TabsContent value="chat" className="flex-1 min-h-0 mt-3">
-              <div className="h-full flex flex-col">
+            <TabsContent value="chat" className="flex-1 mt-3 min-h-0">
+              <div className="flex flex-col h-full">
                 <div className="flex-1 min-h-0">
-                  <ScrollArea className="h-full px-4 py-4">
+                  <ScrollArea className="px-4 py-4 h-full">
                     <div className="space-y-4 pr-4">
                       {messages.length === 0 && !showResumeDialog && (
-                        <div className="h-[350px] flex flex-col items-center justify-center text-center text-muted-foreground space-y-2">
-                          <Sparkles className="h-12 w-12 text-primary" />
+                        <div className="flex flex-col justify-center items-center space-y-2 h-[350px] text-muted-foreground text-center">
+                          <Sparkles className="w-12 h-12 text-primary" />
                           <p className="font-medium">
                             Welcome to AI Fitness Coach!
                           </p>
@@ -415,13 +415,13 @@ export function FloatingChatbot() {
                         >
                           <div
                             className={cn(
-                              "max-w-[80%] rounded-lg px-4 py-2 text-sm",
+                              "px-4 py-2 rounded-lg max-w-[80%] text-sm",
                               message.role === "user"
                                 ? "bg-primary text-primary-foreground"
                                 : "bg-muted",
                             )}
                           >
-                            <p className="whitespace-pre-wrap break-words">
+                            <p className="break-words whitespace-pre-wrap">
                               {message.content}
                             </p>
                           </div>
@@ -430,8 +430,8 @@ export function FloatingChatbot() {
 
                       {isLoading && (
                         <div className="flex justify-start">
-                          <div className="bg-muted rounded-lg px-4 py-2">
-                            <Loader2 className="h-4 w-4 animate-spin text-primary" />
+                          <div className="bg-muted px-4 py-2 rounded-lg">
+                            <Loader2 className="w-4 h-4 text-primary animate-spin" />
                           </div>
                         </div>
                       )}
@@ -442,7 +442,7 @@ export function FloatingChatbot() {
                 </div>
 
                 {/* Chat Input */}
-                <div className="border-t p-3 shrink-0">
+                <div className="p-3 border-t shrink-0">
                   <div className="flex gap-2">
                     <Input
                       value={input}
@@ -459,9 +459,9 @@ export function FloatingChatbot() {
                       className="shrink-0"
                     >
                       {isLoading ? (
-                        <Loader2 className="h-4 w-4 animate-spin" />
+                        <Loader2 className="w-4 h-4 animate-spin" />
                       ) : (
-                        <Send className="h-4 w-4" />
+                        <Send className="w-4 h-4" />
                       )}
                     </Button>
                   </div>
@@ -470,12 +470,12 @@ export function FloatingChatbot() {
             </TabsContent>
 
             {/* Image Upload Tab */}
-            <TabsContent value="upload" className="flex-1 min-h-0 mt-3">
-              <div className="h-full flex flex-col">
+            <TabsContent value="upload" className="flex-1 mt-3 min-h-0">
+              <div className="flex flex-col h-full">
                 <div className="flex-1 min-h-0">
-                  <ScrollArea className="h-full px-4 py-4">
+                  <ScrollArea className="px-4 py-4 h-full">
                     <div className="space-y-4 pr-4">
-                      <div className="flex flex-col items-center justify-center space-y-4">
+                      <div className="flex flex-col justify-center items-center space-y-4">
                         <input
                           ref={fileInputRef}
                           type="file"
@@ -487,19 +487,19 @@ export function FloatingChatbot() {
                         {!imagePreview ? (
                           <div
                             onClick={() => fileInputRef.current?.click()}
-                            className="w-full h-64 border-2 border-dashed border-muted-foreground/25 rounded-lg flex flex-col items-center justify-center cursor-pointer hover:border-primary/50 transition-colors"
+                            className="flex flex-col justify-center items-center border-2 border-muted-foreground/25 hover:border-primary/50 border-dashed rounded-lg w-full h-64 transition-colors cursor-pointer"
                           >
-                            <Upload className="h-12 w-12 text-muted-foreground mb-2" />
-                            <p className="text-sm font-medium text-muted-foreground">
+                            <Upload className="mb-2 w-12 h-12 text-muted-foreground" />
+                            <p className="font-medium text-muted-foreground text-sm">
                               Click to upload food image
                             </p>
-                            <p className="text-xs text-muted-foreground mt-1">
+                            <p className="mt-1 text-muted-foreground text-xs">
                               Get nutrition categories
                             </p>
                           </div>
                         ) : (
-                          <div className="w-full space-y-3">
-                            <div className="relative w-full h-64 rounded-lg overflow-hidden bg-muted">
+                          <div className="space-y-3 w-full">
+                            <div className="relative bg-muted rounded-lg w-full h-64 overflow-hidden">
                               <img
                                 src={imagePreview}
                                 alt="Preview"
@@ -528,16 +528,16 @@ export function FloatingChatbot() {
                         )}
 
                         {imageResponse && (
-                          <div className="w-full space-y-4">
+                          <div className="space-y-4 w-full">
                             {/* Success Header */}
                             {imageResponse[2]?.success && (
-                              <div className="flex items-center gap-2 bg-green-500/10 border border-green-500/20 rounded-lg p-3">
-                                <CheckCircle2 className="h-5 w-5 text-green-500" />
+                              <div className="flex items-center gap-2 bg-green-500/10 p-3 border border-green-500/20 rounded-lg">
+                                <CheckCircle2 className="w-5 h-5 text-green-500" />
                                 <div className="flex-1">
-                                  <p className="text-sm font-semibold text-green-700 dark:text-green-400">
+                                  <p className="font-semibold text-green-700 dark:text-green-400 text-sm">
                                     Analysis Complete
                                   </p>
-                                  <p className="text-xs text-muted-foreground">
+                                  <p className="text-muted-foreground text-xs">
                                     {imageResponse[2].total_items} food item(s) detected
                                   </p>
                                 </div>
@@ -548,80 +548,75 @@ export function FloatingChatbot() {
                             {imageResponse[2]?.items?.map((item: any, idx: number) => (
                               <div
                                 key={idx}
-                                className="bg-gradient-to-br from-primary/5 to-purple-500/5 border rounded-lg p-4 space-y-3"
+                                className="space-y-3 bg-gradient-to-br from-primary/5 to-purple-500/5 p-4 border rounded-lg"
                               >
                                 {/* Food Name & Confidence */}
-                                <div className="flex items-start justify-between gap-2">
+                                <div className="flex justify-between items-start gap-2">
                                   <div>
                                     <h4 className="font-bold text-lg capitalize">
                                       {item.name}
                                     </h4>
-                                    {item.found && (
-                                      <Badge variant="secondary" className="mt-1">
-                                        <TrendingUp className="h-3 w-3 mr-1" />
-                                        {Math.round(item.confidence * 100)}% confidence
-                                      </Badge>
-                                    )}
+                                    
                                   </div>
                                 </div>
 
                                 {/* Nutrition Grid */}
-                                <div className="grid grid-cols-2 gap-2">
-                                  <div className="bg-background/50 rounded-lg p-3">
+                                <div className="gap-2 grid grid-cols-2">
+                                  <div className="bg-background/50 p-3 rounded-lg">
                                     <div className="flex items-center gap-2 mb-1">
-                                      <Flame className="h-4 w-4 text-orange-500" />
-                                      <span className="text-xs font-medium text-muted-foreground">
+                                      <Flame className="w-4 h-4 text-orange-500" />
+                                      <span className="font-medium text-muted-foreground text-xs">
                                         Calories
                                       </span>
                                     </div>
-                                    <p className="text-lg font-bold">
+                                    <p className="font-bold text-lg">
                                       {item.calories_100g}
-                                      <span className="text-xs font-normal text-muted-foreground ml-1">
+                                      <span className="ml-1 font-normal text-muted-foreground text-xs">
                                         kcal
                                       </span>
                                     </p>
                                   </div>
 
-                                  <div className="bg-background/50 rounded-lg p-3">
+                                  <div className="bg-background/50 p-3 rounded-lg">
                                     <div className="flex items-center gap-2 mb-1">
-                                      <Apple className="h-4 w-4 text-red-500" />
-                                      <span className="text-xs font-medium text-muted-foreground">
+                                      <Apple className="w-4 h-4 text-red-500" />
+                                      <span className="font-medium text-muted-foreground text-xs">
                                         Protein
                                       </span>
                                     </div>
-                                    <p className="text-lg font-bold">
+                                    <p className="font-bold text-lg">
                                       {item.protein_100g}
-                                      <span className="text-xs font-normal text-muted-foreground ml-1">
+                                      <span className="ml-1 font-normal text-muted-foreground text-xs">
                                         g
                                       </span>
                                     </p>
                                   </div>
 
-                                  <div className="bg-background/50 rounded-lg p-3">
+                                  <div className="bg-background/50 p-3 rounded-lg">
                                     <div className="flex items-center gap-2 mb-1">
-                                      <Wheat className="h-4 w-4 text-amber-500" />
-                                      <span className="text-xs font-medium text-muted-foreground">
+                                      <Wheat className="w-4 h-4 text-amber-500" />
+                                      <span className="font-medium text-muted-foreground text-xs">
                                         Carbs
                                       </span>
                                     </div>
-                                    <p className="text-lg font-bold">
+                                    <p className="font-bold text-lg">
                                       {item.carbs_100g}
-                                      <span className="text-xs font-normal text-muted-foreground ml-1">
+                                      <span className="ml-1 font-normal text-muted-foreground text-xs">
                                         g
                                       </span>
                                     </p>
                                   </div>
 
-                                  <div className="bg-background/50 rounded-lg p-3">
+                                  <div className="bg-background/50 p-3 rounded-lg">
                                     <div className="flex items-center gap-2 mb-1">
-                                      <Droplet className="h-4 w-4 text-blue-500" />
-                                      <span className="text-xs font-medium text-muted-foreground">
+                                      <Droplet className="w-4 h-4 text-blue-500" />
+                                      <span className="font-medium text-muted-foreground text-xs">
                                         Fat
                                       </span>
                                     </div>
-                                    <p className="text-lg font-bold">
+                                    <p className="font-bold text-lg">
                                       {item.fat_100g}
-                                      <span className="text-xs font-normal text-muted-foreground ml-1">
+                                      <span className="ml-1 font-normal text-muted-foreground text-xs">
                                         g
                                       </span>
                                     </p>
@@ -630,14 +625,14 @@ export function FloatingChatbot() {
 
                                 {/* Additional Info */}
                                 {item.info && (
-                                  <div className="bg-background/50 rounded-lg p-3 space-y-1">
+                                  <div className="space-y-1 bg-background/50 p-3 rounded-lg">
                                     <div className="flex items-center gap-2 mb-2">
-                                      <Info className="h-4 w-4 text-blue-500" />
-                                      <span className="text-xs font-semibold">
+                                      <Info className="w-4 h-4 text-blue-500" />
+                                      <span className="font-semibold text-xs">
                                         Nutritional Information
                                       </span>
                                     </div>
-                                    <p className="text-xs text-muted-foreground leading-relaxed">
+                                    <p className="text-muted-foreground text-xs leading-relaxed">
                                       {item.info}
                                     </p>
                                   </div>
@@ -647,8 +642,8 @@ export function FloatingChatbot() {
 
                             {/* Note */}
                             {imageResponse[2]?.note && (
-                              <div className="bg-muted/50 border border-dashed rounded-lg p-3">
-                                <p className="text-xs text-muted-foreground text-center">
+                              <div className="bg-muted/50 p-3 border border-dashed rounded-lg">
+                                <p className="text-muted-foreground text-xs text-center">
                                   💡 {imageResponse[2].note}
                                 </p>
                               </div>
@@ -658,10 +653,10 @@ export function FloatingChatbot() {
 
                         {/* History Section */}
                         {!imagePreview && imageHistory.length > 0 && (
-                          <div className="w-full space-y-3">
+                          <div className="space-y-3 w-full">
                             <div className="flex items-center gap-2 text-muted-foreground">
-                              <History className="h-4 w-4" />
-                              <h4 className="text-sm font-semibold">Recent Analyses</h4>
+                              <History className="w-4 h-4" />
+                              <h4 className="font-semibold text-sm">Recent Analyses</h4>
                             </div>
                             <div className="space-y-2">
                               {imageHistory.map((analysis, idx) => {
@@ -675,25 +670,25 @@ export function FloatingChatbot() {
                                   <button
                                     key={idx}
                                     onClick={() => loadPreviousAnalysis(analysis)}
-                                    className="w-full flex items-center gap-3 p-3 bg-muted/50 hover:bg-muted rounded-lg transition-colors border border-transparent hover:border-primary/20"
+                                    className="flex items-center gap-3 bg-muted/50 hover:bg-muted p-3 border border-transparent hover:border-primary/20 rounded-lg w-full transition-colors"
                                   >
-                                    <div className="w-16 h-16 rounded-md overflow-hidden bg-background flex-shrink-0">
+                                    <div className="flex-shrink-0 bg-background rounded-md w-16 h-16 overflow-hidden">
                                       <img
                                         src={analysis.imagePreview}
                                         alt="Previous analysis"
                                         className="w-full h-full object-cover"
                                       />
                                     </div>
-                                    <div className="flex-1 text-left min-w-0">
-                                      <p className="text-sm font-semibold capitalize truncate">
+                                    <div className="flex-1 min-w-0 text-left">
+                                      <p className="font-semibold text-sm truncate capitalize">
                                         {foodName}
                                       </p>
-                                      <p className="text-xs text-muted-foreground">
+                                      <p className="text-muted-foreground text-xs">
                                         {totalItems} item(s) detected
                                       </p>
                                       <div className="flex items-center gap-1 mt-1">
-                                        <Clock className="h-3 w-3 text-muted-foreground" />
-                                        <p className="text-xs text-muted-foreground">
+                                        <Clock className="w-3 h-3 text-muted-foreground" />
+                                        <p className="text-muted-foreground text-xs">
                                           {date.toLocaleDateString()} at{" "}
                                           {date.toLocaleTimeString([], {
                                             hour: "2-digit",
@@ -714,14 +709,14 @@ export function FloatingChatbot() {
                 </div>
 
                 {/* Upload Button */}
-                <div className="border-t p-3 shrink-0">
+                <div className="p-3 border-t shrink-0">
                   {isAnalysisComplete ? (
                     <Button
                       onClick={clearImage}
                       variant="outline"
                       className="w-full"
                     >
-                      <RefreshCw className="h-4 w-4 mr-2" />
+                      <RefreshCw className="mr-2 w-4 h-4" />
                       New Analysis
                     </Button>
                   ) : (
@@ -732,12 +727,12 @@ export function FloatingChatbot() {
                     >
                       {isUploadingImage ? (
                         <>
-                          <Loader2 className="h-4 w-4 animate-spin mr-2" />
+                          <Loader2 className="mr-2 w-4 h-4 animate-spin" />
                           Analyzing...
                         </>
                       ) : (
                         <>
-                          <Upload className="h-4 w-4 mr-2" />
+                          <Upload className="mr-2 w-4 h-4" />
                           Analyze Image
                         </>
                       )}
